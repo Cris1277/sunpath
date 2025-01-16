@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Carga de Chart.js -->
+    <link rel="stylesheet" href="styles.css">
+    
+    
+</head>
+
+<body>
+    <header>
+        <h1>🌤 SunPath</h1>
+    </header>
+    <div class="container">
+        <div class="search">
+            <input type="text" id="cityInput" placeholder="Escribe una ciudad..." />
+            <button id="searchBtn">Buscar</button>
+        </div>
+        <div class="unit-toggle">
+            <button id="celsiusBtn" class="active">°C</button>
+            <button id="fahrenheitBtn">°F</button>
+        </div>
+        <div class="weather" id="weatherDisplay">
+            <h2>📍 Ciudad: --</h2>
+            <p>🌡️ Temperatura: --</p>
+            <p>☁️ Estado: --</p>
+        </div>
+        <div class="forecast-title">
+            <h3>Pronóstico semanal:</h3>
+        </div>
+        
+        <div class="forecast" id="forecastDisplay">
+            <!-- Aquí se mostrarán las tarjetas del pronóstico -->
+        </div>
+        
+        <div class="chart-container">
+            <canvas id="temperatureChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="precipitationChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="windSpeedChart"></canvas>
+        </div>
+        
+    </div>
+    <footer class="layout__footer">
+        <p>Desarrollado por Cristian Serrano. </p>
+      <span><a href="#"> SunPath &copy;</a></span>
+    </footer>
+      
+
+
+<script src="./script.js"></script>
+</body>
+
+</html>
