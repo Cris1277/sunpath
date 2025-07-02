@@ -7,7 +7,7 @@
 
 ## 🔗 Demo en vivo
 
-👉 [Ver demo en vivo]([https://tu-link.netlify.app](https://cris1277.github.io/sunpath/)
+👉 [Ver demo en vivo]([https://tu-link.netlify.app](https://cris1277.github.io/sunpath/))
 
 ---
 
