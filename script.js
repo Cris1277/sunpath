@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Función principal para obtener y mostrar datos del clima
     async function getWeather(city) {
         try {
+            //  Esta clave API es de uso limitado y con fines de demostración en portfolio.
+            // Si deseas usar la aplicación completamente, por favor obtén tu propia API key en: https://www.weatherapi.com/
             const res = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=a9b7f097937046b4b1d131943251501&q=${city}&days=7&lang=es`);
             if (!res.ok) throw new Error("Ciudad no encontrada");
 
