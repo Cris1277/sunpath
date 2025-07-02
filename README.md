@@ -59,7 +59,8 @@ cd sunpath
 
 ## 🔐 API Key
 
-Este proyecto utiliza [OpenWeatherMap](https://openweathermap.org/api).  
+Este proyecto utiliza [OpenWeatherMap](https://openweathermap.org/api).
+
 Para hacer funcionar la app debes:
 
 - Crear una cuenta gratuita
@@ -67,9 +68,10 @@ Para hacer funcionar la app debes:
 - Reemplazar en `script.js` donde corresponda:
 
 ```js
+// ⚠️ Esta clave es de uso limitado para demostración en portfolio.
+// Puedes obtener la tuya en https://openweathermap.org/api
 const apiKey = "TU_API_KEY";
 ```
-
 ---
 
 ## 🧑‍💻 Autor
