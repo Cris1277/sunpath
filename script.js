@@ -1,1 +1,127 @@
-document.addEventListener("DOMContentLoaded",(()=>{const e=document.getElementById("weatherDisplay"),t=document.getElementById("forecastDisplay"),a=document.getElementById("searchBtn"),n=document.getElementById("cityInput"),c=document.getElementById("celsiusBtn"),i=document.getElementById("fahrenheitBtn"),r=document.getElementById("temperatureChart").getContext("2d"),d=document.getElementById("precipitationChart").getContext("2d"),o=document.getElementById("windSpeedChart").getContext("2d");let s,l,m,p="metric";async function y(a){try{const c=await fetch(`https://api.weatherapi.com/v1/forecast.json?key=a9b7f097937046b4b1d131943251501&q=${a}&days=7&lang=es`);if(!c.ok)throw new Error("Ciudad no encontrada");const i=await c.json();!function(t){const{name:a}=t.location,n="metric"===p?t.current.temp_c:t.current.temp_f,{text:c,icon:i}=t.current.condition;e.innerHTML=`\n<h2>📍 Ciudad: ${a}</h2>\n<p>🌡️ Temperatura: ${n}°${"metric"===p?"C":"F"}</p>\n<p>☁️ Estado: ${c}</p>\n<img src="https:${i}" alt="${c}">\n`}(i),n=i.forecast.forecastday,t.innerHTML="",n.forEach((e=>{const{date:a}=e,n="metric"===p?e.day.maxtemp_c:e.day.maxtemp_f,c="metric"===p?e.day.mintemp_c:e.day.mintemp_f,{text:i,icon:r}=e.day.condition;t.innerHTML+=`\n     <div class="forecast-day">\n         <h4>${a}</h4>\n         <img src="https:${r}" alt="${i}">\n         <p>🌡️ Máx: ${n}°${"metric"===p?"C":"F"}</p>\n         <p>🌡️ Mín: ${c}°${"metric"===p?"C":"F"}</p>\n         <p>☁️ ${i}</p>\n     </div>\n `})),document.querySelectorAll(".chart-container").forEach((e=>{e.style.display="block"})),function(e){const t=e.map((e=>e.date)),a=e.map((e=>"metric"===p?e.day.avgtemp_c:e.day.avgtemp_f)),n=e.map((e=>e.day.totalprecip_mm)),c=e.map((e=>e.day.maxwind_kph));s&&s.destroy();l&&l.destroy();m&&m.destroy();s=u(r,"Temperatura Promedio",{labels:t,values:a},"rgba(255, 99, 132, 0.6)","°"+("metric"===p?"C":"F")),l=u(d,"Precipitación Total",{labels:t,values:n},"rgba(54, 162, 235, 0.6)","mm"),m=u(o,"Velocidad Máxima del Viento",{labels:t,values:c},"rgba(75, 192, 192, 0.6)","kph")}(i.forecast.forecastday)}catch(e){alert(e.message)}var n}function u(e,t,a,n,c){return new Chart(e,{type:"line",data:{labels:a.labels,datasets:[{label:t,data:a.values,backgroundColor:n,borderColor:n,fill:!1,tension:.1}]},options:{responsive:!0,plugins:{legend:{display:!0}},scales:{y:{beginAtZero:!0,ticks:{callback:function(e){return`${e} ${c}`}}}}}})}a.addEventListener("click",(()=>{const e=n.value.trim();e&&y(e)})),c.addEventListener("click",(()=>{p="metric",c.classList.add("active"),i.classList.remove("active")})),i.addEventListener("click",(()=>{p="imperial",i.classList.add("active"),c.classList.remove("active")}))}));
+
+document.addEventListener("DOMContentLoaded", () => {
+    const weatherDisplay = document.getElementById("weatherDisplay");
+    const forecastDisplay = document.getElementById("forecastDisplay");
+    const searchBtn = document.getElementById("searchBtn");
+    const cityInput = document.getElementById("cityInput");
+    const celsiusBtn = document.getElementById("celsiusBtn");
+    const fahrenheitBtn = document.getElementById("fahrenheitBtn");
+    const temperatureChartCtx = document.getElementById("temperatureChart").getContext("2d");
+    const precipitationChartCtx = document.getElementById("precipitationChart").getContext("2d");
+    const windSpeedChartCtx = document.getElementById("windSpeedChart").getContext("2d");
+
+    let tempChart, precipChart, windChart;
+    let unit = "metric"; // 'metric' for Celsius, 'imperial' for Fahrenheit
+
+    // Función principal para obtener y mostrar datos del clima
+    async function getWeather(city) {
+        try {
+            const res = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=a9b7f097937046b4b1d131943251501&q=${city}&days=7&lang=es`);
+            if (!res.ok) throw new Error("Ciudad no encontrada");
+
+            const data = await res.json();
+
+            // Mostrar datos actuales
+            const { name } = data.location;
+            const temp = unit === "metric" ? data.current.temp_c : data.current.temp_f;
+            const { text: conditionText, icon } = data.current.condition;
+
+            weatherDisplay.innerHTML = `
+                <h2>Ciudad: ${name}</h2>
+                <p>Temperatura: ${temp}°${unit === "metric" ? "C" : "F"}</p>
+                <p>Estado: ${conditionText}</p>
+                <img src="https:${icon}" alt="${conditionText}">
+            `;
+
+            // Mostrar pronóstico de varios días
+            forecastDisplay.innerHTML = "";
+            data.forecast.forecastday.forEach(day => {
+                const max = unit === "metric" ? day.day.maxtemp_c : day.day.maxtemp_f;
+                const min = unit === "metric" ? day.day.mintemp_c : day.day.mintemp_f;
+                const { date } = day;
+                const { text, icon } = day.day.condition;
+
+                forecastDisplay.innerHTML += `
+                    <div class="forecast-day">
+                        <h4>${date}</h4>
+                        <img src="https:${icon}" alt="${text}">
+                        <p>Máx: ${max}°${unit === "metric" ? "C" : "F"}</p>
+                        <p>Mín: ${min}°${unit === "metric" ? "C" : "F"}</p>
+                        <p>${text}</p>
+                    </div>
+                `;
+            });
+
+            // Mostrar contenedores de gráficas
+            document.querySelectorAll(".chart-container").forEach(chart => chart.style.display = "block");
+
+            // Preparar datos para gráficas
+            const labels = data.forecast.forecastday.map(d => d.date);
+            const avgTemps = data.forecast.forecastday.map(d => unit === "metric" ? d.day.avgtemp_c : d.day.avgtemp_f);
+            const precip = data.forecast.forecastday.map(d => d.day.totalprecip_mm);
+            const windSpeeds = data.forecast.forecastday.map(d => d.day.maxwind_kph);
+
+            // Destruir gráficas anteriores
+            tempChart && tempChart.destroy();
+            precipChart && precipChart.destroy();
+            windChart && windChart.destroy();
+
+            // Crear nuevas gráficas
+            tempChart = createChart(temperatureChartCtx, "Temperatura Promedio", labels, avgTemps, "rgba(255,99,132,0.6)", "°" + (unit === "metric" ? "C" : "F"));
+            precipChart = createChart(precipitationChartCtx, "Precipitación Total", labels, precip, "rgba(54,162,235,0.6)", "mm");
+            windChart = createChart(windSpeedChartCtx, "Velocidad del Viento", labels, windSpeeds, "rgba(75,192,192,0.6)", "kph");
+
+        } catch (error) {
+            alert(error.message);
+        }
+    }
+
+    // Función para crear una gráfica con Chart.js
+    function createChart(ctx, label, labels, data, color, unitLabel) {
+        return new Chart(ctx, {
+            type: "line",
+            data: {
+                labels,
+                datasets: [{
+                    label,
+                    data,
+                    backgroundColor: color,
+                    borderColor: color,
+                    fill: false,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: true } },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: value => `${value} ${unitLabel}`
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Event listeners para buscar ciudad
+    searchBtn.addEventListener("click", () => {
+        const city = cityInput.value.trim();
+        if (city) getWeather(city);
+    });
+
+    // Botones para cambiar unidad de temperatura
+    celsiusBtn.addEventListener("click", () => {
+        unit = "metric";
+        celsiusBtn.classList.add("active");
+        fahrenheitBtn.classList.remove("active");
+    });
+
+    fahrenheitBtn.addEventListener("click", () => {
+        unit = "imperial";
+        fahrenheitBtn.classList.add("active");
+        celsiusBtn.classList.remove("active");
+    });
+});
