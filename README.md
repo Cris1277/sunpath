@@ -1,40 +1,41 @@
-
 # 🌤 SunPath — Weather Forecast App (JavaScript + Chart.js)
 
-**SunPath** es una aplicación web interactiva para consultar el clima actual y el pronóstico de los próximos días en cualquier ciudad del mundo. Utiliza datos de la API de **OpenWeatherMap** y los visualiza de forma clara mediante **gráficas y tarjetas informativas**.
+**SunPath** is an interactive web application for checking current weather and multi-day forecasts in any city worldwide. It uses data from the **OpenWeatherMap API** and displays it clearly through **charts and informative cards**.
 
 ---
 
-## 🔗 Demo en vivo
+## 🔗 Live Demo
 
-👉 [Ver demo en vivo](https://cris1277.github.io/sunpath/)
+👉 [View Live Demo](https://cris1277.github.io/sunpath/)
 
 ---
 
-## 🧩 Tecnologías utilizadas
+## 🧩 Tech Stack
 
 - ⚙️ HTML5 + CSS3
-- ⚡ JavaScript (Vanilla)
-- 📊 Chart.js (para gráficas de temperatura, viento y precipitación)
-- ☁️ API de OpenWeatherMap
-- 🎨 Diseño responsive básico y limpio
+- ⚡ Vanilla JavaScript
+- 📊 Chart.js (for temperature, wind, and precipitation charts)
+- ☁️ OpenWeatherMap API
+- 🎨 Basic, clean responsive design
 
 ---
 
-## ✨ Características principales
+## ✨ Key Features
 
-- 🔍 Búsqueda por nombre de ciudad
-- 🌡️ Visualización de temperatura actual y estado del cielo
-- 🔄 Botón para alternar entre °C y °F
-- 📅 Tarjetas con pronóstico de varios días (mínima, máxima, clima)
-- 📈 Gráficas interactivas para:
-  - Temperatura
-  - Precipitación
-  - Velocidad del viento
+- 🔍 Search by city name
+- 🌡️ Display of current temperature and sky condition
+- 🔄 Toggle button for °C and °F
+- 📅 Forecast cards showing:
+  - Min and max temperatures
+  - Weather condition
+- 📈 Interactive charts for:
+  - Temperature
+  - Precipitation
+  - Wind speed
 
 ---
 
-## 📁 Estructura del proyecto
+## 📁 Project Structure
 
 ```
 📦 sunpath/
@@ -45,42 +46,43 @@
 
 ---
 
-## 🚀 Cómo usar localmente
+## 🚀 How to Use Locally
 
-1. Clona el repositorio:
+1. Clone the repository:
 ```bash
-git clone https://github.com/tuusuario/sunpath.git
+git clone https://github.com/yourusername/sunpath.git
 cd sunpath
 ```
 
-2. Abre `index.html` en tu navegador.
+2. Open `index.html` in your browser.
 
 ---
 
 ## 🔐 API Key
 
-Este proyecto utiliza [OpenWeatherMap](https://openweathermap.org/api).
+This project uses [OpenWeatherMap](https://openweathermap.org/api).
 
-Para hacer funcionar la app debes:
+To make the app work:
 
-- Crear una cuenta gratuita
-- Obtener tu propia API key
-- Reemplazar en `script.js` donde corresponda:
+- Create a free account
+- Get your own API key
+- Replace the placeholder in `script.js`:
 
 ```js
-// ⚠️ Esta clave es de uso limitado para demostración en portfolio.
-// Puedes obtener la tuya en https://openweathermap.org/api
-const apiKey = "TU_API_KEY";
+// ⚠️ This key is for limited portfolio demonstration use only.
+// You can get your own at https://openweathermap.org/api
+const apiKey = "YOUR_API_KEY";
 ```
+
 ---
 
-## 🧑‍💻 Autor
+## 🧑‍💻 Author
 
 **Cristian Serrano**  
 🔗 [GitHub - Cris1277](https://github.com/Cris1277)
 
 ---
 
-## 📝 Licencia
+## 📝 License
 
 MIT License © 2025 Cristian Serrano
